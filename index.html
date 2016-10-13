@@ -223,7 +223,27 @@
         </div>
 
         <script src="js/framework7.min.js" type="text/javascript"></script>
-        <script src="js/tic-tac-toe.js" type="text/javascript"></script>
+        <script src="js/controllers/ttt.js" type="text/javascript"></script>
+        <script src="js/models/difficulty.js" type="text/javascript"></script>
+        <script src="js/models/field.js" type="text/javascript"></script>
+        <script src="js/models/step.js" type="text/javascript"></script>
+
+        <script>
+
+            var app = new Framework7({
+                animateNavBackIcon: true,
+                material: true
+            });
+
+            var mainView = app.addView('.view-main', {
+                domCache: true //enable inline pages
+            });
+
+            var $$ = Dom7;
+
+            TTTController.init();
+
+        </script>
 
 	</body>
 </html>
