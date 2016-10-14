@@ -211,6 +211,8 @@ var TTTController = {
     _stopTimer: function() {
         clearInterval(this.timer);
         this.timeRemained = 0;
+
+        app.setProgressbar($$('#timer'), 0);
     },
 
     _updateTime: function(timeRemained) {
@@ -228,39 +230,49 @@ var TTTController = {
 
             case 'first_time':
 
-                message  = '<button class="button button-raised color-green" onClick="TTTController.retry()">Start</button>';
-                message += '<button class="button button-raised color-green" onClick="TTTController.openPopup(\'rules\')">Rules</button>';
+                message  = '<button class="button button-raised bg-green color-black" onClick="TTTController.retry()">Start</button>';
+                message += '<button class="button button-raised bg-red color-black" onClick="TTTController.openPopup(\'rules\')">Rules</button>';
 
                 break;
 
             case 'start':
 
-                message = '<button class="button button-raised color-green" onClick="TTTController.retry()">Start</button>';
+                message = '<button class="button button-raised bg-green color-black" onClick="TTTController.retry()">Start</button>';
 
                 break;
 
             case 'resume':
 
-                message = '<button class="button button-raised color-green" onClick="TTTController.resume()">Resume</button>';
+                message = '<button class="button button-raised bg-green color-black" onClick="TTTController.resume()">Resume</button>';
 
                 break;
 
             case 'win':
 
                 message  = 'You Win!';
-                message += ' <button class="button button-raised color-green" onClick="TTTController.retry()">Retry</button>';
+                message += ' <button class="button button-raised bg-green color-black" onClick="TTTController.retry()">Retry</button>';
 
                 break;
 
             case 'lose':
 
                 message  = 'You Lose!';
-                message += ' <button class="button button-raised color-green" onClick="TTTController.retry()">Retry</button>';
+                message += ' <button class="button button-raised bg-green color-black" onClick="TTTController.retry()">Retry</button>';
 
                 break;
         }
 
         $$('#message').html(message);
+
+        // Hide content
+        if (message == '') {
+            $$('#result_message').css('display','none').removeClass('fade-in');
+
+        // Show content
+        } else {
+            this._stopTimer();
+            $$('#result_message').css('display','table').addClass('fade-in');
+        }
     },
 
     _setWinner: function(type) {
